@@ -23,35 +23,49 @@
 #define ALT_L LALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
 
+#define CGUI_A LGUI_T(KC_A)
+#define ALT_R LALT_T(KC_R)
+#define SFT_S LSFT_T(KC_S)
+#define CTLT LCTL_T(KC_T)
+
+#define CTL_N RCTL_T(KC_N)
+#define SFT_E RSFT_T(KC_E)
+#define ALT_I LALT_T(KC_I)
+#define GUI_O RGUI_T(KC_O)
+
 //#define COMBO_COUNT 2
 
 enum custom_keycode {
     QWERTY= SAFE_RANGE,
     COLEMAK,
 };
+enum combo_events {
+    EMAIL
+};
 
 
-
-const uint16_t PROGMEM quot[] = {KC_W,KC_E, COMBO_END};
-const uint16_t PROGMEM dash[] = {KC_E,KC_R, COMBO_END};
+const uint16_t PROGMEM quot[] = {KC_W,KC_F, COMBO_END};
+const uint16_t PROGMEM dash[] = {KC_F,KC_P, COMBO_END};
+const uint16_t PROGMEM email[] = {KC_Z,KC_A, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(quot, KC_QUOT),
     COMBO(dash, KC_MINS),
+    //[EMAIL] = COMBO_ACTION(email),
 };
 
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QW] = LAYOUT( /* Qwerty */
-    KC_Q,    KC_W,    KC_E,    KC_R,    KC_B,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
-    GUI_A,    ALT_S,    SFT_D,    CTL_F, KC_T,                      KC_M,    CTL_J,    SFT_K,    ALT_L,    GUI_SCLN ,
-    KC_Z,    KC_X,    KC_C,    KC_G,    KC_V,              KC_N,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
+    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
+    GUI_A,    ALT_S,    SFT_D,    CTL_F, KC_G,                      KC_H,    CTL_J,    SFT_K,    ALT_L,    GUI_SCLN ,
+    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LSFT_T(KC_DEL), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_CM] = LAYOUT( /* COLEMAK  */
     KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN    ,
-    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                      KC_M,    KC_N,    KC_E,    KC_I,    KC_O ,
+    CGUI_A,    ALT_R,    SFT_S,   CTLT,    KC_G,                      KC_M,    CTL_N,    SFT_E,    ALT_I,    GUI_O ,
     KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,              KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LCTL_T(KC_ESC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
@@ -111,3 +125,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 };
+void process_combo_event(uint16_t combo_index,bool pressed) {
+    switch(combo_index) {
+    case EMAIL:
+        if(pressed) {
+            SEND_STRING("jeffrey.smith7@gmail.com");
+        }
+        break;
+    }
+}

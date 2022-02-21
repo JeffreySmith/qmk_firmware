@@ -54,3 +54,4 @@
 #define TAPPING_FORCE_HOLD
 #define PERMISSIVE_HOLD
 #define COMBO_TERM 65
+#define FORCE_NKRO

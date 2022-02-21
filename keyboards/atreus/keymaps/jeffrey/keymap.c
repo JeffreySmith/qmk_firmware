@@ -9,7 +9,7 @@
 // entirely and just use numbers.
 #define _QW 0
 #define _CM 1
-#define HO 2
+#define _HO 2
 #define _RS 3
 #define _LW 4
 #define _RAISE 5
@@ -39,21 +39,23 @@
 enum custom_keycode {
     QWERTY= SAFE_RANGE,
     COLEMAK,
+    HANDSDOWN,
     EMAIL
 };
 enum combo_events {
-    //EMAIL
+    TESTEMAIL,
     TEST
 };
 
 
 const uint16_t PROGMEM quot[] = {KC_W,KC_F, COMBO_END};
 const uint16_t PROGMEM dash[] = {KC_F,KC_P, COMBO_END};
-const uint16_t PROGMEM email[] = {KC_Z,KC_A, COMBO_END};
+const uint16_t PROGMEM enter[] = {KC_H,KC_COMM, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(quot, KC_QUOT),
     COMBO(dash, KC_MINS),
+    COMBO(enter,KC_ENTER),
     //[EMAIL] = COMBO_ACTION(email),
 };
 
@@ -74,8 +76,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_HO] = LAYOUT( /* HANDSOFF  */
     KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,                      KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLASH    ,
-    CGUI_A,    ALT_R,    SFT_S,   CTLT,    KC_G,                      KC_M,    CTL_N,    SFT_E,    ALT_I,    GUI_O ,
-    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,              KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
+    LGUI_T(KC_R),    SFT_S,   SFT_T(KC_N),   CTLT,    KC_G,                      KC_W,    CTL_T(KC_U),    SFT_E,    ALT_I,    LGUI_T(KC_A) ,
+    KC_Z,    KC_X,    KC_C,    KC_D,    KC_B,              KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LCTL_T(KC_ESC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
 
@@ -97,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *       voldn  super shift bksp ctrl || alt space   L0  prtsc scroll pause
    */
   [_LW] = LAYOUT( /* [> LOWER <] */
-    KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_MS_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
+    HANDSDOWN,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_MS_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
     QWERTY,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_MS_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
     COLEMAK,   KC_ASDN, KC_ASUP,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
     KC_ASTG, KC_ASRP, KC_LGUI, KC_LSFT, KC_BSPC, TG(_LW), TG(_LW), KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
@@ -129,6 +131,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 persistent_default_layer_set(1UL<<_QW);
             }
             return false;
+    case HANDSDOWN:
+        if(record->event.pressed) {
+            persistent_default_layer_set(1UL<<_HO);
+        }
+        return false;
     case EMAIL:
         if(record->event.pressed) {
             SEND_STRING("jeffrey.smith7@gmail.com");
@@ -141,7 +148,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 void process_combo_event(uint16_t combo_index,bool pressed) {
     switch(combo_index) {
-    case EMAIL:
+    case TESTEMAIL:
         if(pressed) {
             SEND_STRING("jeffrey.smith7@gmail.com");
         }

@@ -12,5 +12,5 @@
 #define TAPPING_FORCE_HOLD
 #define PERMISSIVE_HOLD
 
-#define COMBO_COUNT 3
+#define COMBO_COUNT 6
 #define COMBO_TERM 65

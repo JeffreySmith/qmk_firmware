@@ -44,19 +44,25 @@ enum custom_keycode {
 };
 enum combo_events {
     TESTEMAIL,
-    TEST
+    UNDERSCORE_COMBO,
 };
 
 
 const uint16_t PROGMEM quot[] = {KC_W,KC_F, COMBO_END};
 const uint16_t PROGMEM dash[] = {KC_F,KC_P, COMBO_END};
 const uint16_t PROGMEM enter[] = {KC_H,KC_COMM, COMBO_END};
-
+const uint16_t PROGMEM scln[] = {KC_Q,KC_C,COMBO_END};
+const uint16_t PROGMEM caps[] = {KC_P,KC_B,COMBO_END};
+const uint16_t PROGMEM underscore[] = {KC_J,KC_L,COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(quot, KC_QUOT),
     COMBO(dash, KC_MINS),
     COMBO(enter,KC_ENTER),
-    //[EMAIL] = COMBO_ACTION(email),
+    COMBO(scln,KC_SCLN),
+    COMBO(caps,KC_CAPS),
+    COMBO(underscore,LSFT_T(KC_MINS)),
+    //[UNDERSCORE_COMBO] = COMBO_ACTION(UNDERSCORE_COMBO), 
+    //[EMAIL] = COMBO_ACTION(TESTEMAIL),
 };
 
 
@@ -77,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_HO] = LAYOUT( /* HANDSOFF  */
     KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,                      KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLASH    ,
     LGUI_T(KC_R),    SFT_S,   SFT_T(KC_N),   CTLT,    KC_G,                      KC_W,    CTL_T(KC_U),    SFT_E,    ALT_I,    LGUI_T(KC_A) ,
-    KC_Z,    KC_X,    KC_C,    KC_D,    KC_B,              KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
+    KC_X,    KC_M,    KC_L,    KC_D,    KC_B,              KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LCTL_T(KC_ESC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
 
@@ -151,6 +157,14 @@ void process_combo_event(uint16_t combo_index,bool pressed) {
     case TESTEMAIL:
         if(pressed) {
             SEND_STRING("jeffrey.smith7@gmail.com");
+        }
+        break;
+    
+    case UNDERSCORE_COMBO:
+        if(pressed) {
+            //SS_DOWN(X_LSFT);
+            tap_code16(KC_MINS);
+            //SS_UP(X_LSFT);
         }
         break;
     }

@@ -60,7 +60,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(enter,KC_ENTER),
     COMBO(scln,KC_SCLN),
     COMBO(caps,KC_CAPS),
-    COMBO(underscore,LSFT_T(KC_MINS)),
+    COMBO(underscore,KC_UNDS),
     //[UNDERSCORE_COMBO] = COMBO_ACTION(UNDERSCORE_COMBO), 
     //[EMAIL] = COMBO_ACTION(TESTEMAIL),
 };
@@ -82,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_HO] = LAYOUT( /* HANDSOFF  */
     KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,                      KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLASH    ,
-    LGUI_T(KC_R),    SFT_S,   SFT_T(KC_N),   CTLT,    KC_G,                      KC_W,    CTL_T(KC_U),    SFT_E,    ALT_I,    LGUI_T(KC_A) ,
+    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_G,                      KC_W,    CTL_T(KC_U),    SFT_E,    ALT_I,    LGUI_T(KC_A) ,
     KC_X,    KC_M,    KC_L,    KC_D,    KC_B,              KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LCTL_T(KC_ESC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_R), LCTL_T(KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
 
   /*
@@ -95,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_RS] = LAYOUT( /* [> RAISE <] */
     KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR,                   KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR ,
-    KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS ,
+    KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_UNDS, KC_4,    KC_5,   KC_6, KC_PLUS ,
     KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR,                   KC_GRV,  KC_1,    KC_2,   KC_3, KC_BSLS ,
-    TG(_LW), KC_X,  KC_LGUI, KC_LSFT, KC_DEL, _______, KC_ENTER, KC_SPC,  EMAIL, KC_DOT, KC_0, KC_EQL  ),
+    TG(_LW), KC_UNDS,  KC_LGUI, KC_LSFT, KC_DEL, _______, KC_ENTER, KC_SPC,  EMAIL, KC_DOT, KC_0, KC_EQL  ),
   /*
    * insert home   up  end   pgup       ||      up     F7    F8    F9   F10
    *  del   left  down right pgdn       ||     down    F4    F5    F6   F11
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR,                   KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR ,
     KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS ,
     KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR,                   KC_GRV,  KC_1,    KC_2,   KC_3, KC_BSLS ,
-    TG(_LW), QWERTY,  KC_LGUI, KC_LSFT, KC_DEL, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  )
+    TG(_LW), QWERTY,  CMB_TOG, KC_LSFT, KC_DEL, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  )
 
   
 };

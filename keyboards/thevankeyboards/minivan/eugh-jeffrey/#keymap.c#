@@ -57,16 +57,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_CM] = LAYOUT( /* Colemak */
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
-    LCTL_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O, LCTL_T(KC_ENTER),
+    LCTL_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,   LCTL_T(KC_ENTER),
     KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
   [_HD] = LAYOUT( /* Handsdown reference */
     KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,    KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLSH, KC_BSPC,
-    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    LCTL_T(KC_ENTER),
+    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_W,    KC_U,    KC_E,    KC_I,    KC_O,    LCTL_T(KC_ENTER),
     KC_LSPO, KC_X,    KC_M,    KC_L,    KC_D,    KC_B,    KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT, KC_RSPC,
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
+
   [_L1] = LAYOUT( /* LAYER 1 */
     KC_GRAVE,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL,
     _______, KC_BSLS, KC_QUOT, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______,
@@ -83,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,
     KC_ESC,  _______, _______, _______, _______, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,
     KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
-    _______, KC_LSFT, KC_B,                      KC_SPC,  KC_C,                      _______, _______, _______
+    TG(_L3), KC_LSFT, KC_B,                      KC_SPC,  KC_C,                      _______, _______, _______
   )
 };
 
@@ -111,11 +112,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             persistent_default_layer_set(1UL<<_CM);
           }
           return false;
-      case HANDSDOWN:
-          if (record->event.pressed) {
-              persistent_default_layer_set(1UL<<_HD);
-          }
-          return false;
+        case HANDSDOWN:
+            if (record->event.pressed) {
+                persistent_default_layer_set(1UL<<_HD);
+            }
         default:
           return true;
       }

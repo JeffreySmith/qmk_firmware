@@ -10,7 +10,7 @@
 #define _QW 0
 #define _CM 1
 #define _HD 2
-#define _HDG 3
+#define _HDP 3
 #define _RS 4
 #define _LW 5
 #define _RAISE 6
@@ -41,9 +41,10 @@ enum custom_keycode {
     QWERTY= SAFE_RANGE,
     COLEMAK,
     HANDSDOWN,
-    HANDSDOWNG,
+    HANDSDOWNP,
     EMAIL,
-    KC_QU
+    KC_QU,
+    
 };
 enum combo_events {
     TESTEMAIL,
@@ -80,8 +81,10 @@ const uint16_t PROGMEM scln[] = {KC_Q,KC_C,COMBO_END};
 const uint16_t PROGMEM caps[] = {KC_P,KC_B,COMBO_END};
 const uint16_t PROGMEM underscore[] = {KC_J,KC_L,COMBO_END};
 
-const uint16_t PROGMEM jfz[] = {KC_J,KC_F,COMBO_END};
-const uint16_t PROGMEM ukq[] = {KC_U,KC_K,COMBO_END};
+const uint16_t PROGMEM jgz[] = {KC_J,KC_G,COMBO_END};
+const uint16_t PROGMEM pvq[] = {KC_P,KC_V,COMBO_END};
+
+
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(quot, KC_QUOT),
     COMBO(dash, KC_MINS),
@@ -89,8 +92,8 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(scln,KC_SCLN),
     COMBO(caps,KC_CAPS),
     COMBO(underscore,KC_UNDS),
-    COMBO(jfz,KC_Z),
-    COMBO(ukq,KC_Q),
+    COMBO(jgz,KC_Z),
+    COMBO(pvq,KC_Q),
     //[UNDERSCORE_COMBO] = COMBO_ACTION(UNDERSCORE_COMBO), 
     //[EMAIL] = COMBO_ACTION(TESTEMAIL),
 };
@@ -108,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_QU,    KC_W,    KC_F,    KC_P,    KC_B,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN    ,
     CGUI_A,    ALT_R,    SFT_S,   CTLT,    KC_G,                      KC_M,    CTL_N,    SFT_E,    ALT_I,    GUI_O ,
     KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,              KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LT(_RS,KC_ESC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LT(_RS,KC_SPC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HD] = LAYOUT( /* HANDSOFF  */
     KC_QU,    KC_C,    KC_H,    KC_P,    KC_V,                      KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLASH    ,
@@ -116,11 +119,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_X,    KC_M,    KC_L,    KC_D,    KC_B,              KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_R), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
-  [_HDG] = LAYOUT( /* HANDSOFF Gold  */
-    KC_J,    KC_F,    KC_M,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_QUOT    ,
-    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_D),    KC_W ,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    ALT_I,    LGUI_T(KC_H) ,
-    KC_X,    KC_G,    KC_L,    KC_C,    KC_B,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_T), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+  [_HDP] = LAYOUT( /* HANDSOFF platinum  */
+      KC_J,    KC_G,    KC_H,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    LSFT(KC_QUOT)    ,
+      LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_T),    KC_B ,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_C),    LGUI_T(KC_I) ,
+    KC_X,    KC_F,    KC_M,    KC_D,    KC_K,              KC_MINS,    KC_U,    KC_O, KC_W,  KC_Y ,
+    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   /*
    *  !       @     up     {    }        ||     pgup    7     8     9    *
@@ -140,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *       voldn  super shift bksp ctrl || alt space   L0  prtsc scroll pause
    */
   [_LW] = LAYOUT( /* [> LOWER <] */
-    HANDSDOWN,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,                   KC_MS_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
+    HANDSDOWN,  HANDSDOWNP, KC_UP,   KC_END,  KC_PGUP,                   KC_MS_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
     QWERTY,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_MS_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
     COLEMAK,   KC_ASDN, KC_ASUP,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
     KC_ASTG, KC_ASRP, KC_LGUI, KC_LSFT, KC_BSPC, TG(_LW), TG(_LW), KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
@@ -177,9 +180,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             persistent_default_layer_set(1UL<<_HD);
         }
         return false;
-    case HANDSDOWNG:
+    case HANDSDOWNP:
         if(record->event.pressed) {
-            persistent_default_layer_set(1UL<<_HDG);
+            persistent_default_layer_set(1UL<<_HDP);
         }
         return false;
     case EMAIL:

@@ -11,9 +11,10 @@
 #define _CM 1
 #define _HD 2
 #define _HDP 3
-#define _RS 4
-#define _LW 5
-#define _RAISE 6
+#define _HDN 4
+#define _RS 5
+#define _LW 6
+#define _RAISE 7
 
 #define GUI_A LGUI_T(KC_A)
 #define ALT_S LALT_T(KC_S)
@@ -126,6 +127,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_X,    KC_F,    KC_M,    KC_D,    KC_K,              KC_MINS,    KC_U,    KC_O, KC_W,  KC_Y ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
+  [_HDN] = LAYOUT( /* HANDSOFF NEU */
+      // It doesn't actually fit! Not sure what to do about that
+    KC_W,    KC_F,    KC_M,    KC_P,    KC_V,                      KC_SLSH,    KC_DOT,    KC_QU,    KC_QUOT,    KC_Z    ,
+    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_B,                      KC_J,    CTL_T(KC_A),    SFT_E,    ALT_I,    LGUI_T(KC_H) ,
+    KC_X,    KC_C,    KC_L,    KC_D,    KC_G,              KC_COMM,    KC_U,    KC_O, KC_Y,  KC_K ,
+    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_R), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+  ),
+
   /*
    *  !       @     up     {    }        ||     pgup    7     8     9    *
    *  #     left   down  right  $        ||     pgdn    4     5     6    +

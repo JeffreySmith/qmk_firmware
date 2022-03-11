@@ -9,9 +9,10 @@
 #define _DV 1
 #define _CM 2
 #define _HD 3
-#define _L1 4
-#define _L2 5
-#define _L3 6
+#define _HDN 4
+#define _L1 5
+#define _L2 6
+#define _L3 7
 
 // Curly braces have their own keys. These are defined to make them not mess up
 // the grid in layer 2.
@@ -22,7 +23,8 @@ enum custom_keycodes {
   DVORAK = SAFE_RANGE,
   QWERTY,
   COLEMAK,
-  HANDSDOWN
+  HANDSDOWN,
+  NEU
 };
 
 enum {
@@ -63,8 +65,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_HD] = LAYOUT( /* Handsdown reference */
     KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,    KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLSH, KC_BSPC,
-    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_W,    KC_U,    KC_E,    KC_I,    KC_Arsn,    LCTL_T(KC_ENTER),
+    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    LCTL_T(KC_ENTER),
     KC_LSPO, KC_X,    KC_M,    KC_L,    KC_D,    KC_B,    KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT, KC_RSPC,
+    KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
+  ),
+  [_HDN] = LAYOUT( /* Handsdown NEU*/
+      // Again, have to mess with the J key to make it work. Eugh
+    KC_TAB,  KC_W,    KC_F,    KC_M,    KC_P,    KC_V,    KC_SLSH,    KC_DOT,    KC_Q,    KC_QUOT,    KC_Z, KC_BSPC,
+    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_B,    KC_COMM,    KC_A,    KC_E,    KC_I,    KC_H,    LCTL_T(KC_ENTER),
+    KC_LSPO, KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_J,    KC_U,    KC_O, KC_Y,  KC_K, KC_SCLN,
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
   [_L1] = LAYOUT( /* LAYER 1 */
@@ -114,6 +123,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case HANDSDOWN:
           if (record->event.pressed) {
               persistent_default_layer_set(1UL<<_HD);
+          }
+          return false;
+      case NEU:
+          if (record->event.pressed){
+              persistent_default_layer_set(1UL<<_HDN);
           }
           return false;
         default:

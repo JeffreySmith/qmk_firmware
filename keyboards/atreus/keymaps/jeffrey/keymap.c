@@ -12,9 +12,10 @@
 #define _HD 2
 #define _HDP 3
 #define _HDN 4
-#define _RS 5
-#define _LW 6
-#define _RAISE 7
+#define _HDG 5
+#define _RS 6
+#define _LW 7
+#define _RAISE 8
 
 #define GUI_A LGUI_T(KC_A)
 #define ALT_S LALT_T(KC_S)
@@ -43,6 +44,8 @@ enum custom_keycode {
     COLEMAK,
     HANDSDOWN,
     HANDSDOWNP,
+    NEU,
+    GOLD,
     EMAIL,
     KC_QU,
     
@@ -122,17 +125,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_R), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HDP] = LAYOUT( /* HANDSOFF platinum  */
-      KC_J,    KC_G,    KC_H,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    LSFT(KC_QUOT)    ,
+      KC_J,    KC_G,    KC_H,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_Q    ,
       LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_T),    KC_B ,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_C),    LGUI_T(KC_I) ,
     KC_X,    KC_F,    KC_M,    KC_D,    KC_K,              KC_MINS,    KC_U,    KC_O, KC_W,  KC_Y ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_Z, KC_RALT, KC_QUOT, KC_ENT
+  ),
+  [_HDG] = LAYOUT( /* HANDSOFF GOLD  */
+      KC_J,    KC_G,    KC_M,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_Q    ,
+      LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_D),    KC_B ,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_I),    LGUI_T(KC_H) ,
+    KC_X,    KC_F,    KC_L,    KC_C,    KC_W,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
+    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_T), LT(_RS,KC_F), KC_SPC, KC_Z, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HDN] = LAYOUT( /* HANDSOFF NEU */
       // It doesn't actually fit! Not sure what to do about that
+      // added the J key to the right thumb button. Hopefully that's good enough?
     KC_W,    KC_F,    KC_M,    KC_P,    KC_V,                      KC_SLSH,    KC_DOT,    KC_QU,    KC_QUOT,    KC_Z    ,
-    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_B,                      KC_J,    CTL_T(KC_A),    SFT_E,    ALT_I,    LGUI_T(KC_H) ,
-    KC_X,    KC_C,    KC_L,    KC_D,    KC_G,              KC_COMM,    KC_U,    KC_O, KC_Y,  KC_K ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_R), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_B,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    ALT_I,    LGUI_T(KC_H) ,
+    KC_X,    KC_C,    KC_L,    KC_D,    KC_G,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
+    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_SCLN), LT(_RS,KC_J), KC_SPC, KC_RALT, KC_MINS, KC_SCLN, KC_ENT
   ),
 
   /*
@@ -155,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LW] = LAYOUT( /* [> LOWER <] */
     HANDSDOWN,  HANDSDOWNP, KC_UP,   KC_END,  KC_PGUP,                   KC_MS_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
     QWERTY,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_MS_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
-    COLEMAK,   KC_ASDN, KC_ASUP,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
+    COLEMAK,   NEU, GOLD,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
     KC_ASTG, KC_ASRP, KC_LGUI, KC_LSFT, KC_BSPC, TG(_LW), TG(_LW), KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
 
   [_RAISE] = LAYOUT( /* [> RAISE <] */
@@ -195,11 +205,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             persistent_default_layer_set(1UL<<_HDP);
         }
         return false;
+    case NEU:
+        if(record->event.pressed) {
+            persistent_default_layer_set(1UL<<_HDN);
+        }
+        return false;
+    case GOLD:
+        if(record->event.pressed) {
+            persistent_default_layer_set(1UL<<_HDG);
+        }
+        return false;
     case EMAIL:
         if(record->event.pressed) {
             SEND_STRING("jeffrey.smith7@gmail.com");
         }
         break;
+    
     case KC_QU:
         if (record->event.pressed) {
             key_timer = timer_read();

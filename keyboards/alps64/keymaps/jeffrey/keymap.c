@@ -16,6 +16,19 @@ enum custom_keycodes {
   NEU,
   COLEMAK
 };
+enum combo_events {
+    C_AU,
+    C_FM,
+    C_UAMINS,
+    COMBO_LENGTH
+};
+
+uint8_t mod_state;
+
+const uint16_t PROGMEM AU[]={KC_A,KC_COMM,COMBO_END};
+const uint16_t PROGMEM FM[]={KC_F,KC_M,COMBO_END};
+const uint16_t PROGMEM UAMINS[]={KC_U,KC_MINS,COMBO_END};
+
 
  
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,11 +48,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCAP, KC_LGUI, KC_LALT,                 LT(_LOWER,KC_SPC),                                  KC_RALT, KC_RGUI, KC_RCTL
     ),
   [_HDN] =LAYOUT_aek_103( 
-    KC_GESC,  KC_1,    KC_2,    KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,    KC_0,    KC_SCLN, KC_EQL, KC_BSPC,
+    KC_GESC,  KC_9,    KC_5,    KC_0,   KC_3,   KC_7,   KC_6,   KC_2,   KC_1,   KC_4,    KC_8,    KC_SCLN, KC_EQL, KC_BSPC,
     KC_TAB,  KC_W,    KC_F,    KC_M,   KC_P,   KC_V,   KC_SLSH, KC_DOT,   KC_Q,   KC_QUOT,    KC_Z,    KC_LBRC, KC_RBRC, KC_BSLS,
-    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,   KC_T,   KC_B,   KC_COMM,   KC_A,   KC_E,   KC_I,    KC_O, KC_J, KC_ENT,
+    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,   KC_T,   KC_B,   KC_COMM,   KC_A,   KC_E,   KC_I,    KC_H, KC_J, KC_ENT,
     KC_LSPO, KC_X,    KC_C,   KC_L,   KC_D,   KC_G,   KC_MINS,   KC_U,   KC_O, KC_Y,  KC_K, KC_RSPC,
-    KC_LCAP, KC_LGUI, KC_LALT,                 LT(_LOWER,KC_SPC),                                  KC_RALT, KC_RGUI, KC_RCTL
+    KC_LCAP, KC_LGUI, KC_LALT,                 LT(_LOWER,KC_SPC),                                  KC_RALT, KC_RGUI, OSM(MOD_MASK_CTRL)
     ),
   [_LOWER]= LAYOUT_aek_103( 
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,
@@ -90,3 +103,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     return true;
 };
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    mod_state=get_mods();
+    switch(combo_index) {
+        case C_AU:
+            if(pressed){
+                tap_code16(KC_A);
+                if(get_mods() & MOD_MASK_SHIFT) {
+                    del_mods(MOD_MASK_SHIFT);
+                }
+                tap_code16(KC_U);
+                set_mods(mod_state);
+            }
+            break;
+        
+    
+    case C_FM:
+        if(pressed){     
+            tap_code16(KC_F);
+            if(get_mods() & MOD_MASK_SHIFT) {
+                del_mods(MOD_MASK_SHIFT);
+            }
+            tap_code16(KC_L);
+            set_mods(mod_state);
+        }
+        break;
+    case C_UAMINS:
+        if(pressed){
+            
+                
+            tap_code16(KC_U);
+            if(get_mods() & MOD_MASK_SHIFT) {
+                del_mods(MOD_MASK_SHIFT);
+            }
+            tap_code16(KC_A);
+            set_mods(mod_state);
+        }
+        break;
+    }
+}
+                          

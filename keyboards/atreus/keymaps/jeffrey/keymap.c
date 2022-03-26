@@ -131,20 +131,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_Z, KC_RALT, KC_QUOT, KC_ENT
   ),
   [_HDG] = LAYOUT( /* HANDSOFF GOLD  */
-      KC_J,    KC_G,    KC_M,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_Q    ,
-      LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_D),    KC_B ,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_I),    LGUI_T(KC_H) ,
+    KC_J,    KC_G,    KC_M,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_Q    ,
+    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_D),    KC_B , KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_I),    LGUI_T(KC_H) ,
     KC_X,    KC_F,    KC_L,    KC_C,    KC_W,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_T), LT(_RS,KC_F), KC_SPC, KC_Z, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HDN] = LAYOUT( /* HANDSOFF NEU */
       // It doesn't actually fit! Not sure what to do about that
-      // added the J key to the right thumb button. Hopefully that's good enough?
-    KC_W,    KC_F,    KC_M,    KC_P,    KC_V,                      KC_SLSH,    KC_DOT,    KC_QU,    KC_QUOT,    KC_Z    ,
-    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_B,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    ALT_I,    LGUI_T(KC_H) ,
+     // added the J key to the right thumb button. Hopefully that's good enough?
+    KC_W,    KC_F,    KC_M,    KC_P,    KC_V,                      KC_SLSH,     KC_DOT,    KC_QU,    KC_QUOT,    KC_Z    ,
+    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_B,              KC_COMM, CTL_T(KC_A), SFT_E, ALT_I, LGUI_T(KC_H) ,
     KC_X,    KC_C,    KC_L,    KC_D,    KC_G,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
     KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_SCLN), LT(_RS,KC_J), KC_SPC, KC_RALT, KC_MINS, KC_SCLN, KC_ENT
   ),
-
   /*
    *  !       @     up     {    }        ||     pgup    7     8     9    *
    *  #     left   down  right  $        ||     pgdn    4     5     6    +

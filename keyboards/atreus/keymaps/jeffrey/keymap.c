@@ -58,6 +58,7 @@ enum combo_events {
 enum {
     TD_Q_QU,
 };
+
 void qu_tap(qk_tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1)

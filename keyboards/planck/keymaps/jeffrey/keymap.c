@@ -58,7 +58,6 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(quot, KC_QUOT),
     COMBO(dash, KC_MINS),
     COMBO(enter, KC_ENTER),
-    
     //[EMAIL] = COMBO_ACTION(email),
 };
 #define LOWER MO(_LOWER)
@@ -128,8 +127,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NEU] = LAYOUT_planck_grid(
     KC_TAB,  KC_W,    KC_F,    KC_M,    KC_P,    KC_V,    KC_SLSH,    KC_DOT,    KC_Q,    KC_QUOT,    KC_Z, KC_BSPC,
     LCTL_T(KC_ESC),  KC_R,    KC_S,    KC_N,    KC_T,    KC_B,    KC_COMM,    KC_A,    KC_E,    KC_I,    KC_H,    LCTL_T(KC_J),
-    KC_LSPO, KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K, RSFT_T(KC_SCLN) ,
-    KC_ENTER, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LSFT_T(KC_SPC),  LSFT_T(KC_SPC),  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT
+    OSM(MOD_LSFT), KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K, RSFT_T(KC_SCLN) ,
+    KC_ENTER, OSM(MOD_LCTL), KC_LALT, KC_LGUI, LOWER,   LSFT_T(KC_SPC),  LSFT_T(KC_SPC),  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT
 ),
 /* Lower
  * ,-----------------------------------------------------------------------------------.

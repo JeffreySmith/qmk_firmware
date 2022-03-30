@@ -66,14 +66,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_HD] = LAYOUT( /* Handsdown reference */
     KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,    KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLSH, KC_BSPC,
     LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    LCTL_T(KC_ENTER),
-    KC_LSPO, KC_X,    KC_M,    KC_L,    KC_D,    KC_B,    KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT, KC_RSPC,
+    OSM(MOD_LSFT), KC_X,    KC_M,    KC_L,    KC_D,    KC_B,    KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT, KC_RSPC,
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
   [_HDN] = LAYOUT( /* Handsdown NEU*/
       // Again, have to mess with the J key to make it work. Eugh
     KC_TAB,  KC_W,    KC_F,    KC_M,    KC_P,    KC_V,    KC_SLSH,    KC_DOT,    KC_Q,    KC_QUOT,    KC_Z, KC_BSPC,
-    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_B,    KC_COMM,    KC_A,    KC_E,    KC_I,    KC_H,    LCTL_T(KC_ENTER),
-    KC_LSPO, KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_J,    KC_U,    KC_O, KC_Y,  KC_K, KC_SCLN,
+    LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_B,    KC_COMM,    KC_A,    KC_E,    KC_I,    KC_H,    LCTL_T(KC_J),
+    OSM(MOD_LSFT), KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_J,    KC_U,    KC_O, KC_Y,  KC_K, RSFT_T(KC_SCLN),
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
   [_L1] = LAYOUT( /* LAYER 1 */
@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_LGUI, _______,                   KC_ENT, _______,                   _______, _______, _______
   ),
   [_L2] = LAYOUT( /* LAYER 2 */
-      KC_GRAVE, QWERTY,  COLEMAK, HANDSDOWN, _______, _______, _______, KC_7,    KC_8,    KC_9,    KC_0,    _______,
+      KC_GRAVE, QWERTY,  COLEMAK, HANDSDOWN, NEU, _______, _______, KC_7,    KC_8,    KC_9,    KC_0,    _______,
     KC_ESC,  KC_PIPE, KC_DQUO, KC_UNDS, KC_PLUS, L_CURBR, R_CURBR, KC_4,    KC_5,    KC_6,    _______, KC_ENT,
     _______, _______, _______, _______, _______, _______, KC_0,    KC_1,    KC_2,    KC_3,    _______, _______,
     _______, _______, _______,                   _______, KC_ENT,                   _______, _______, _______

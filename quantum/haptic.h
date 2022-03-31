@@ -18,10 +18,6 @@
 #pragma once
 #include <stdint.h>
 #include <stdbool.h>
-#include "quantum.h"
-#ifdef DRV2605L
-#    include "DRV2605L.h"
-#endif
 
 #ifndef HAPTIC_FEEDBACK_DEFAULT
 #    define HAPTIC_FEEDBACK_DEFAULT 0
@@ -34,14 +30,14 @@
 typedef union {
     uint32_t raw;
     struct {
-        bool     enable : 1;
-        uint8_t  feedback : 2;
-        uint8_t  mode : 7;
-        bool     buzz : 1;
-        uint8_t  dwell : 7;
-        bool     cont : 1;
-        uint8_t  amplitude : 8;
-        uint16_t reserved : 7;
+        bool    enable : 1;
+        uint8_t feedback : 2;
+        uint8_t mode : 7;
+        bool    buzz : 1;
+        uint8_t dwell : 7;
+        bool    cont : 1;
+        uint8_t amplitude : 8;
+        uint8_t reserved : 5;
     };
 } haptic_config_t;
 
@@ -52,7 +48,6 @@ typedef enum HAPTIC_FEEDBACK {
     HAPTIC_FEEDBACK_MAX,
 } HAPTIC_FEEDBACK;
 
-bool    process_haptic(uint16_t keycode, keyrecord_t *record);
 void    haptic_init(void);
 void    haptic_task(void);
 void    eeconfig_debug_haptic(void);
@@ -69,6 +64,7 @@ void    haptic_set_mode(uint8_t mode);
 void    haptic_set_dwell(uint8_t dwell);
 void    haptic_set_buzz(uint8_t buzz);
 void    haptic_buzz_toggle(void);
+uint8_t haptic_get_enable(void);
 uint8_t haptic_get_mode(void);
 uint8_t haptic_get_feedback(void);
 void    haptic_dwell_increase(void);
@@ -79,3 +75,30 @@ void    haptic_cont_decrease(void);
 
 void haptic_play(void);
 void haptic_shutdown(void);
+void haptic_notify_usb_device_state_change(void);
+
+#ifdef HAPTIC_ENABLE_PIN_ACTIVE_LOW
+#    ifndef HAPTIC_ENABLE_PIN
+#        error HAPTIC_ENABLE_PIN not defined
+#    endif
+#    define HAPTIC_ENABLE_PIN_WRITE_ACTIVE() writePinLow(HAPTIC_ENABLE_PIN)
+#    define HAPTIC_ENABLE_PIN_WRITE_INACTIVE() writePinHigh(HAPTIC_ENABLE_PIN)
+#else
+#    define HAPTIC_ENABLE_PIN_WRITE_ACTIVE() writePinHigh(HAPTIC_ENABLE_PIN)
+#    define HAPTIC_ENABLE_PIN_WRITE_INACTIVE() writePinLow(HAPTIC_ENABLE_PIN)
+#endif
+
+#ifdef HAPTIC_ENABLE_STATUS_LED_ACTIVE_LOW
+#    ifndef HAPTIC_ENABLE_STATUS_LED
+#        error HAPTIC_ENABLE_STATUS_LED not defined
+#    endif
+#    define HAPTIC_ENABLE_STATUS_LED_WRITE_ACTIVE() writePinLow(HAPTIC_ENABLE_STATUS_LED)
+#    define HAPTIC_ENABLE_STATUS_LED_WRITE_INACTIVE() writePinHigh(HAPTIC_ENABLE_STATUS_LED)
+#else
+#    define HAPTIC_ENABLE_STATUS_LED_WRITE_ACTIVE() writePinHigh(HAPTIC_ENABLE_STATUS_LED)
+#    define HAPTIC_ENABLE_STATUS_LED_WRITE_INACTIVE() writePinLow(HAPTIC_ENABLE_STATUS_LED)
+#endif
+
+#ifndef HAPTIC_OFF_IN_LOW_POWER
+#    define HAPTIC_OFF_IN_LOW_POWER 0
+#endif

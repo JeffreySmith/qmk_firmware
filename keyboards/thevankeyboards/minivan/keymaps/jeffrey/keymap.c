@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_HD] = LAYOUT( /* Handsdown reference */
     KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,    KC_V,    KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLSH, KC_BSPC,
     LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_W,    KC_U,    KC_E,    KC_I,    KC_A,    LCTL_T(KC_ENTER),
-    OSM(MOD_LSFT), KC_X,    KC_M,    KC_L,    KC_D,    KC_B,    KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT, KC_RSPC,
+   OSM(MOD_LSFT), KC_X,    KC_M,    KC_L,    KC_D,    KC_B,    KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT, KC_RSPC,
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
   [_HDN] = LAYOUT( /* Handsdown NEU*/

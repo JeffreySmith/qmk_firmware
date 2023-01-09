@@ -20,8 +20,7 @@
 #define R_CURBR LSFT(KC_RBRC)
 
 enum custom_keycodes {
-  DVORAK = SAFE_RANGE,
-  QWERTY,
+  QWERTY = SAFE_RANGE,
   COLEMAK,
   HANDSDOWN,
   NEU
@@ -51,12 +50,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),   LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
-  [_DV] = LAYOUT( /* Dvorak */
-    KC_TAB,  KC_SLSH, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
-    MO(_L1), KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    MO(_L1),
-    KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    MO(_L2),
-    KC_LCTL, KC_RALT, KC_LGUI,                   KC_ENT,  KC_SPC,                    KC_RALT, KC_ESC,  TG(_L3)
-  ),
   [_CM] = LAYOUT( /* Colemak */
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     LCTL_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O, LCTL_T(KC_ENTER),
@@ -73,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       // Again, have to mess with the J key to make it work. Eugh
     KC_TAB,  KC_W,    KC_F,    KC_M,    KC_P,    KC_V,    KC_SLSH,    KC_DOT,    KC_Q,    KC_QUOT,    KC_Z, KC_BSPC,
     LCTL_T(KC_ESC), KC_R,    KC_S,    KC_N,    KC_T,    KC_B,    KC_COMM,    KC_A,    KC_E,    KC_I,    KC_H,    LCTL_T(KC_J),
-    OSM(MOD_LSFT), KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_J,    KC_U,    KC_O, KC_Y,  KC_K, RSFT_T(KC_SCLN),
+    OSM(MOD_LSFT), KC_X,    KC_C,    KC_L,    KC_D,    KC_G,    KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K, RSFT_T(KC_SCLN),
     KC_LCTL, KC_LALT, KC_LGUI,                   LT(_L2,KC_SPC),  LT(_L1,KC_SPC),   KC_RALT, KC_QUOT,  TG(_L3)
   ),
   [_L1] = LAYOUT( /* LAYER 1 */
@@ -89,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______,                   _______, KC_ENT,                   _______, _______, _______
   ),
   [_L3] = LAYOUT( /* LAYER 3 */
-    _______, _______, _______, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,
-    KC_ESC,  _______, _______, _______, _______, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,
-    KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
+      _______, KC_F, KC_UP, _______, KC_KP_7,KC_KP_8, KC_KP_9, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,
+      KC_ESC,  KC_LEFT, KC_DOWN, KC_RIGHT, KC_KP_4, KC_KP_5,KC_KP_6, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,
+    KC_LSFT, KC_1,    KC_2,    KC_KP_0,    KC_KP_1,    KC_KP_2,    KC_KP_3,    KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
     _______, KC_LSFT, KC_B,                      KC_SPC,  KC_C,                      _______, _______, _______
   )
 };
@@ -103,12 +96,6 @@ void persistent_default_layer_set(uint16_t default_layer) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       switch(keycode) {
-          case DVORAK:
-          if (record->event.pressed) {
-            persistent_default_layer_set(1UL<<_DV);
-          }
-         return false;
-          
         case QWERTY:
           if (record->event.pressed) {
               

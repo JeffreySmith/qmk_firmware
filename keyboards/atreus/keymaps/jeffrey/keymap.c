@@ -59,7 +59,7 @@ enum {
     TD_Q_QU,
 };
 
-void qu_tap(qk_tap_dance_state_t *state, void *user_data)
+void qu_tap(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1)
     {
@@ -74,7 +74,7 @@ void qu_tap(qk_tap_dance_state_t *state, void *user_data)
         reset_tap_dance(state);
     }
 }
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_Q_QU] = ACTION_TAP_DANCE_FN(qu_tap),
 };
     
@@ -100,7 +100,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(jgz,KC_Z),
     COMBO(pvq,KC_Q),
     //[UNDERSCORE_COMBO] = COMBO_ACTION(UNDERSCORE_COMBO), 
-    //[EMAIL] = COMBO_ACTION(TESTEMAIL),
+    //[EMAIL] = COMBO_ACTION(TESTEMAIL),  -j
 };
 
 
@@ -111,39 +111,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P    ,
     GUI_A,    ALT_S,    SFT_D,    CTL_F, KC_G,                      KC_H,    CTL_J,    SFT_K,    ALT_L,    GUI_SCLN ,
     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LSFT_T(KC_DEL), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    KC_ESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LSFT_T(KC_DEL), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_CM] = LAYOUT( /* COLEMAK  */
     KC_QU,    KC_W,    KC_F,    KC_P,    KC_B,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN    ,
     CGUI_A,    ALT_R,    SFT_S,   CTLT,    KC_G,                      KC_M,    CTL_N,    SFT_E,    ALT_I,    GUI_O ,
     KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,              KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LT(_RS,KC_SPC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    KC_ESC, KC_TAB, KC_LGUI,  KC_LALT, KC_BSPC, LT(_RS,KC_SPACE), LT(_RS,KC_SPC), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HD] = LAYOUT( /* HANDSOFF  */
     KC_QU,    KC_C,    KC_H,    KC_P,    KC_V,                      KC_K,    KC_Y,    KC_O,    KC_J,    KC_SLASH    ,
     LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_G,                      KC_W,    CTL_T(KC_U),    SFT_E,    ALT_I,    LGUI_T(KC_A) ,
     KC_X,    KC_M,    KC_L,    KC_D,    KC_B,              KC_Z,    KC_F,    KC_QUOT, KC_COMM,  KC_DOT ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_R), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
+    QK_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_R), LT(_RS,KC_A), KC_SPC, KC_RALT, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HDP] = LAYOUT( /* HANDSOFF platinum  */
       KC_J,    KC_G,    KC_H,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_Q    ,
       LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_T),    KC_B ,                      KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_C),    LGUI_T(KC_I) ,
     KC_X,    KC_F,    KC_M,    KC_D,    KC_K,              KC_MINS,    KC_U,    KC_O, KC_W,  KC_Y ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_Z, KC_RALT, KC_QUOT, KC_ENT
+    QK_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_L), LT(_RS,KC_SPC), KC_SPC, KC_Z, KC_RALT, KC_QUOT, KC_ENT
   ),
   [_HDG] = LAYOUT( /* HANDSOFF GOLD  */
     KC_J,    KC_G,    KC_M,    KC_P,    KC_V,                      KC_SCLN,    KC_DOT,    KC_SLASH,    KC_QUOT,    KC_Q    ,
     LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   LCTL_T(KC_D),    KC_B , KC_COMM,    CTL_T(KC_A),    SFT_E,    LALT_T(KC_I),    LGUI_T(KC_H) ,
     KC_X,    KC_F,    KC_L,    KC_C,    KC_W,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_T), LT(_RS,KC_F), KC_SPC, KC_Z, KC_MINS, KC_QUOT, KC_ENT
+    QK_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_T), LT(_RS,KC_F), KC_SPC, KC_Z, KC_MINS, KC_QUOT, KC_ENT
   ),
   [_HDN] = LAYOUT( /* HANDSOFF NEU */
       // It doesn't actually fit! Not sure what to do about that
      // added the J key to the right thumb button. Hopefully that's good enough?
     KC_W,    KC_F,    KC_M,    KC_P,    KC_V,                      KC_SLSH,     KC_DOT,    KC_QU,    KC_QUOT,    KC_Z    ,
-    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_B,              KC_COMM, CTL_T(KC_A), SFT_E, ALT_I, LGUI_T(KC_H) ,
-    KC_X,    KC_C,    KC_L,    KC_D,    KC_G,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
-    KC_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_SCLN), LT(_RS,KC_J), KC_SPC, KC_RALT, KC_MINS, KC_SCLN, KC_ENT
+    LGUI_T(KC_R),    LALT_T(KC_S),   SFT_T(KC_N),   CTLT,    KC_G,              KC_COMM, CTL_T(KC_A), SFT_E, ALT_I, LGUI_T(KC_H) ,
+    KC_X,    KC_C,    KC_L,    KC_D,    KC_B,              KC_MINS,    KC_U,    KC_O, KC_Y,  KC_K ,
+    QK_GESC, KC_TAB, KC_LGUI,  KC_SCLN, KC_BSPC, LT(_RS,KC_SCLN), LT(_RS,KC_J), KC_SPC, KC_RALT, KC_MINS, KC_SCLN, KC_ENT
   ),
   /*
    *  !       @     up     {    }        ||     pgup    7     8     9    *
@@ -165,14 +165,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LW] = LAYOUT( /* [> LOWER <] */
     HANDSDOWN,  HANDSDOWNP, KC_UP,   KC_END,  KC_PGUP,                   KC_MS_UP,   KC_F7,   KC_F8,   KC_F9,   KC_F10  ,
     QWERTY,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,                   KC_MS_DOWN, KC_F4,   KC_F5,   KC_F6,   KC_F11  ,
-    COLEMAK,   NEU, GOLD,   KC_NO,   RESET,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
-    KC_ASTG, KC_ASRP, KC_LGUI, KC_LSFT, KC_BSPC, TG(_LW), TG(_LW), KC_SPC,  TO(_QW), KC_PSCR, KC_SLCK, KC_PAUS ),
+    COLEMAK,   NEU, GOLD,   KC_NO,   QK_BOOT,                     KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_F12  ,
+    _______, _______, KC_LGUI, KC_LSFT, KC_BSPC, TG(_LW), TG(_LW), KC_SPC,  TO(_QW), KC_PSCR, _______, KC_PAUS ),
 
   [_RAISE] = LAYOUT( /* [> RAISE <] */
     KC_EXLM, KC_AT,   KC_UP,   KC_LCBR, KC_RCBR,                   KC_PGUP, KC_7,    KC_8,   KC_9, KC_ASTR ,
     KC_HASH, KC_LEFT, KC_DOWN, KC_RGHT, KC_DLR,                    KC_PGDN, KC_4,    KC_5,   KC_6, KC_PLUS ,
     KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_AMPR,                   KC_GRV,  KC_1,    KC_2,   KC_3, KC_BSLS ,
-    TG(_LW), QWERTY,  CMB_TOG, KC_LSFT, KC_DEL, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  )
+    TG(_LW), QWERTY,  CM_TOGG, KC_LSFT, KC_DEL, KC_LCTL, KC_LALT, KC_SPC,  KC_TRNS, KC_DOT, KC_0, KC_EQL  )
 
   
 };

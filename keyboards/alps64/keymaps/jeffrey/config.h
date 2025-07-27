@@ -1,6 +1,6 @@
 #pragma once
 
-#define FORCE_NKRO
+#define NKRO_DEFAULT_ON true
 
 #define DEBOUNCE 5
 #define TAPPING_TERM 200
